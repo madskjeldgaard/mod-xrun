@@ -1,5 +1,7 @@
 # jack_xruntotal
 
+![extreme xruns](extreme-xruns-status.gif)
+
 This is a simple tool that listens for JACK xruns and prints them to the terminal in a way that works really well with status bar programs such as `i3status` and `i3blocks`.
 
 Originally forked from falkTX (thanks!)
