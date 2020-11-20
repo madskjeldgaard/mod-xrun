@@ -1,9 +1,9 @@
 CC ?= gcc
 
-all: mod-xrun
+all: jack_xruntotal
 
-mod-xrun: mod-xrun.c
+jack_xruntotal: jack_xruntotal.c
 	$(CC) $^ -std=gnu99 $(shell pkg-config --cflags --libs jack) -Wall -Wextra -Werror -o $@
 
 clean:
-	rm -f mod-xrun
+	rm -f jack_xruntotal

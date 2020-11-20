@@ -50,7 +50,7 @@ static int xrun_callback(void* arg)
 
 int main(void)
 {
-    jack_client_t* const client = jack_client_open("mod-xrun", JackNoStartServer, NULL);
+    jack_client_t* const client = jack_client_open("jack_xruntotal", JackNoStartServer, NULL);
 
     if (client == NULL)
     {
@@ -87,8 +87,6 @@ int main(void)
         return 1;
     }
 
-    printf("mod-xrun started, listening for xruns...\n");
-
     int xrun_count, last_xruns = 0;
 
     while (! _jack_shutdown)
@@ -99,10 +97,11 @@ int main(void)
         {
             //jack_set_buffer_size(client, _buffer_size);
             last_xruns = _jack_xruns;
-            printf("xrun! %i of %i total\n", xrun_count, last_xruns);
         }
 
-        printf("DSP Load: %.2f\n", jack_cpu_load(client));
+		printf("%i \n", _jack_xruns);
+		fflush(stdout); // Prints to screen or whatever your standard out is
+        /* printf("DSP Load: %.2f\n", jack_cpu_load(client)); */
 
         sleep(1);
     }
