@@ -10,6 +10,7 @@ static volatile bool           _jack_shutdown = false;
 static volatile int            _jack_xruns    = 0;
 static volatile jack_client_t* _jack_client   = NULL;
 static          uint32_t       _buffer_size   = 0;
+static          uint32_t       _sleep_time   = 1;
 
 static void signal_handler(int frame)
 {
@@ -99,11 +100,13 @@ int main(void)
             last_xruns = _jack_xruns;
         }
 
+		// Print number of xruns
 		printf("%i \n", _jack_xruns);
-		fflush(stdout); // Prints to screen or whatever your standard out is
-        /* printf("DSP Load: %.2f\n", jack_cpu_load(client)); */
 
-        sleep(1);
+		// Flush the output buffer (needed for i3blocks and others )
+		fflush(stdout); 
+
+        sleep(_sleep_time);
     }
 
     if (_jack_client != NULL)
