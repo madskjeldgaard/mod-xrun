@@ -49,3 +49,15 @@ command=path/to/binary/jack_xruntotal
 interval=persist
 label=<span color="#427B58">xruns: </span>
 ```
+
+## Polybar example
+
+``` 
+[module/xruns]
+type = custom/script
+exec-if = pgrep -x jackd
+format-prefix = "x"
+exec = [[ $(pgrep -x jack_xruntotal) ]] && killall jack_xruntotal; jack_xruntotal
+tail = true
+interval=5
+```
